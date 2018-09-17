@@ -10,6 +10,19 @@
     <!-- Added a link to Bootstrap-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
+    <script src="calculator.js"></script>
+    
+    <style>
+        .btn{
+            width: 100%;
+            display: block;
+            margin-bottom: 30px;
+            font-size: 0.5rem;
+        }
+
+        h1 { font-size: 1.5rem; line-height: 1.4rem;}
+    </style>
+
 </head>
 <body>
 
@@ -29,27 +42,37 @@
           <h3 class="card-header">Calculator</h3>
 
           <div class="card-body">
-            <button id="button-1" class="btn btn-primary number" value="1"><h1>1</h1></button>
-            <button id="button-2" class="btn btn-primary number" value="2"><h1>2</h1></button>
-            <button id="button-3" class="btn btn-primary number" value="3"><h1>3</h1></button>
-            <button id="button-plus" class="btn btn-danger operator" value="plus"><h1>+</h1></button>
-            <br><br>
-            <button id="button-4" class="btn btn-primary number" value="4"><h1>4</h1></button>
-            <button id="button-5" class="btn btn-primary number" value="5"><h1>5</h1></button>
-            <button id="button-6" class="btn btn-primary number" value="6"><h1>6</h1></button>
-            <button id="button-minus" class="btn btn-danger operator" value="minus"><h1>&minus;</h1></button>
-            <br><br>
-            <button id="button-7" class="btn btn-primary number" value="7"><h1>7</h1></button>
-            <button id="button-8" class="btn btn-primary number" value="8"><h1>8</h1></button>
-            <button id="button-9" class="btn btn-primary number" value="9"><h1>9</h1></button>
-            <button id="button-multiply" class="btn btn-danger operator" value="times"><h1>&times;</h1></button>
-            <br><br>
-            <button id="button-0" class="btn btn-primary number" value="0"><h1>0</h1></button>
-            <button id="button-divide" class="btn btn-danger operator" value="divide"><h1>&divide;</h1></button>
-            <button id="button-power" class="btn btn-danger operator" value="power"><h1>^</h1></button>
-            <button id="button-equal" class="btn btn-success equal" value="equals"><h1>=</h1></button>
-            <br><br>
-            <button id="button-clear" class="btn btn-dark clear" value="clear"><h1>clear</h1></button>
+              <div class="conatiner">
+                    <div class="row">
+                        <div class="col-6"><button id="button-clear" class="btn btn-dark clear" value="clear"><h1>clear</h1></button></div>
+                        <div class="col-3"><button id="button-bk" class="btn btn-dark bk" value="clear"><h1>Bk</h1></button></div>
+                        <div class="col-3"><button id="button-divide" class="btn btn-danger operator" value="divide"><h1>&divide;</h1></button></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3"><button id="button-7" class="btn btn-primary number" value="7"><h1>7</h1></button></div>
+                        <div class="col-3"><button id="button-8" class="btn btn-primary number" value="8"><h1>8</h1></button></div>
+                        <div class="col-3"><button id="button-9" class="btn btn-primary number" value="9"><h1>9</h1></button></div>
+                        <div class="col-3"><button id="button-multiply" class="btn btn-danger operator" value="times"><h1>&times;</h1></button></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3"><button id="button-4" class="btn btn-primary number" value="4"><h1>4</h1></button></div>
+                        <div class="col-3"><button id="button-5" class="btn btn-primary number" value="5"><h1>5</h1></button></div>
+                        <div class="col-3"><button id="button-6" class="btn btn-primary number" value="6"><h1>6</h1></button></div>
+                        <div class="col-3"><button id="button-minus" class="btn btn-danger operator" value="minus"><h1>&minus;</h1></button></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3"><button id="button-1" class="btn btn-primary number" value="1"><h1>1</h1></button></div>
+                        <div class="col-3"><button id="button-2" class="btn btn-primary number" value="2"><h1>2</h1></button></div>
+                        <div class="col-3"><button id="button-3" class="btn btn-primary number" value="3"><h1>3</h1></button></div>
+                        <div class="col-3"><button id="button-plus" class="btn btn-danger operator" value="plus"><h1>+</h1></button></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6"><button id="button-0" class="btn btn-primary number" value="0"><h1>0</h1></button></div>
+                        <div class="col-3"><button id="button-equal" class="btn btn-success equal" value="equals"><h1>=</h1></button></div>
+                        <div class="col-3"><button id="button-power" class="btn btn-danger operator" value="power"><h1>^</h1></button></div>
+                        
+                    </div>
+              </div>            
           </div>
         </div>
       </div>
@@ -72,93 +95,9 @@
 
 <script type="text/javascript">
 
-$(document).ready(function() {
-
-    // Create an object that will hold all functionality
-    var calculator = {
-        //Variables
-        calResults : "",
-        calMathOperator : undefined,
-        //var calClear ="";
-        calFirstNumber : "",
-        calSecondNumber : "",
-        addNumber: function(input)
-        {
-            if(this.calMathOperator === undefined)
-            {
-                this.calFirstNumber += input;
-            }
-            else
-            {
-                this.calSecondNumber +=  input;
-            }
-        },
-        setOperator: function(input){
-            this.calMathOperator = input;
-        },
-        performCalculation: function(){
-            if(this.calMathOperator === undefined){
-                return;
-            }
-            else if(this.calMathOperator === "plus") {
-                this.calResults = parseInt(this.calFirstNumber) + parseInt(this.calSecondNumber);
-            }
-            else if(this.calMathOperator === "minus") {
-                this.calResults = parseInt(this.calFirstNumber) - parseInt(this.calSecondNumber);
-            }
-            else if(this.calMathOperator === "times") {
-                this.calResults = parseInt(this.calFirstNumber) * parseInt(this.calSecondNumber);
-            }
-            else if(this.calMathOperator === "devide") {
-                this.calResults = parseInt(this.calFirstNumber) / parseInt(this.calSecondNumber);
-            }
-            else if(this.calMathOperator === "power") {
-                this.calResults = parseInt(this.calFirstNumber) ^ parseInt(this.calSecondNumber);
-            }
-        }
-    }
-
-    $(".number").on("click", function(){
-        var number = $(this).attr("value");
-        calculator.addNumber(number);
-        console.log(calculator.calFirstNumber);        
-        console.log(calculator.calSecondNumber);
+    $(document).ready(function() {
+        calculator.init();
     });
-
-    $(".operator").on("click", function(){
-        var operator = $(this).attr("value");
-        calculator.setOperator(operator);
-        console.log(calculator.calMathOperator);
-    });
-
-    $(".equal").on("click", function(){
-        calculator.performCalculation();
-        console.log(calculator.calResults);
-    });
-    // start method
-
-    // Allow user to select multiple #s before the operation
-
-    // display values selected
-
-    // Allow user to select an operation
-
-    // display operations selected
-
-
-    // Allow user to select multiple #s after the operatioin is selected
-
-    // display values selected
-
-
-    // Exectue the opeation
-
-    // Display the results
-
-    // Allow user to clear results and start again
-
-
-});
 
 </script>
 
